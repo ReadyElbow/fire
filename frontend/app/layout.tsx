@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
-import { Noto_Sans } from 'next/font/google'
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import '@mantine/core/styles.css';
-
+import { PageNavbar } from './components/navbar/navbar';
+import { create } from 'domain';
 // const inter = Noto_Sans({ weight: '400', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'My Mantine app',
+  title: 'Financial Tracker',
   description: 'I have followed setup instructions carefully',
 }
 
@@ -21,7 +21,10 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <PageNavbar />
+          {children}
+        </MantineProvider>
       </body>
     </html>
   )
