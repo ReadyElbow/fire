@@ -1,0 +1,7 @@
+
+.Button {
+    border: 0;
+    border-radius: 4px;
+    padding: 0.7em;
+    user-select: none;
+}

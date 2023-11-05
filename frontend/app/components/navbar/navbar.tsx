@@ -7,6 +7,8 @@ import {
     IconSettings,
 } from '@tabler/icons-react';
 import classes from './navbar.module.css'
+import { RecordMenu, TSubMenu } from '../../../../frontend-remix/app/components/Navbar/menuDetails';
+
 
 type TDropdownItems = {
     icon: Icon
@@ -19,24 +21,11 @@ interface IDropdownItems {
     dropdownTitle: string
 }
 
-const RecordMenu = [
-    {
-        icon: IconSettings,
-        title: 'Expenses',
-        description: 'This Pokémon’s cry is very loud and distracting',
-    },
-    {
-        icon: IconSettings,
-        title: 'Expenses',
-        description: 'This Pokémon’s cry is very loud and distracting',
-    },
-    {
-        icon: IconSettings,
-        title: 'Expenses',
-        description: 'This Pokémon’s cry is very loud and distracting',
-    },
-]
 
+
+function GenerateSubMenu(subMenuDetails: TSubMenu){
+
+}
 
 function GenerateMenu({dropdownItems, dropdownTitle}: IDropdownItems) {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);

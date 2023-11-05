@@ -1,0 +1,14 @@
+@font-face {
+    font-family: NotoSans;
+    src: url("public/Noto_Sans/NotoSans-Medium.ttf");
+    font-style: normal;
+    font-display: swap;
+}
+
+* {
+    font-family: NotoSans;
+}
+
+h1 {
+    font-size: 3rem;
+}
