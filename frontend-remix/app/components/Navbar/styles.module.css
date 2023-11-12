@@ -1,29 +1,50 @@
 .header {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  min-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: var(--blue-1);
+}
+
+.headerTitle {
+  padding-left: 1rem;
+  font-size: 4em;
+  font-weight: 900;
+  color: var(--blue-11);
+}
+
+.headerTop {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  max-width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
-.NavMenuRoot {
+.headerNavbar {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.navMenuRoot {
   position: relative;
   display: flex;
   justify-content: center;
+  /* Attempting to shift the navmenu to be be closer to top elements */
+  top: -2rem;
   /* 
   This is required to be able to render the dropdown    
   in the boundaries of the NavMenuRoot otherwise it is
   cut off
   */
-  width: 70vw;
+  width: 100%;
   z-index: 1;
 }
 
-.NavMenuList {
+.navMenuList {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   border: 0px;
   border-bottom: 1px;
   border-style: solid;
@@ -38,16 +59,16 @@
 .NavMenuTrigger {
   display: flex;
   align-items: center;
-  /* height: 100%; */
-  text-decoration: none;
+  height: 100%;
   padding: 1rem;
+  text-decoration: none;
   font-weight: 600;
-  font-size: 1rem;
   color: var(--black-a9);
   border: none;
+  outline: none;
+  user-select: none;
   border-radius: 2%;
   background-color: rgb(255, 255, 255);
-  padding: 1em;
   transition: all 500ms ease;
 }
 
@@ -99,11 +120,53 @@
 }
 
 
+/* Take up all of space required */
+.ViewportPosition {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  perspective: 2000px;
+}
+
+.NavigationMenuViewport {
+  position: relative;
+  transform-origin: top center;
+  margin-top: 10px;
+  width: 100%;
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  height: var(--radix-navigation-menu-viewport-height);
+  transition: width, height, 300ms ease;
+}
+.NavigationMenuViewport[data-state='open'] {
+  animation: scaleIn 200ms ease;
+}
+.NavigationMenuViewport[data-state='closed'] {
+  animation: scaleOut 200ms ease;
+}
+@media only screen and (min-width: 600px) {
+  .NavigationMenuViewport {
+    width: var(--radix-navigation-menu-viewport-width);
+  }
+}
+
 .NavSubMenu {
   display: grid;
   padding: 1rem;
-  grid-template-columns: 1fr 1fr;
-  gap: 3px;
+  margin: 0;
+  column-gap: 10px;
+  list-style: none;
+}
+@media only screen and (min-width: 600px) {
+  .NavSubMenu {
+    width: 500px;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .NavSubMenu a {
@@ -113,11 +176,11 @@
   justify-content: space-around;
   overflow: hidden;
   padding: 1rem;
-  border-radius: 10%;
+  border-radius: 2%;
   color: inherit;
   text-decoration: none;
   gap: 1rem;
-  width: 2rem;
+  width: 100%;
   transition: background-color 100ms;
 }
 .NavSubMenu a:hover {
@@ -132,17 +195,6 @@
   color: var(--black-a7);
   font-weight: 100;
 }
-
-/* 
-#sidebar nav a.active {
-  background: hsl(224, 98%, 58%);
-  color: white;
-}
-
-#sidebar nav a.pending {
-  animation: progress 2s infinite ease-in-out;
-  animation-delay: 200ms;
-} */
 
 /* -------------- */
 /* - Animations - */
@@ -228,115 +280,5 @@
   }
   to {
     opacity: 0;
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* styles.css */
-.NavigationMenuRoot {
-  position: relative;
-  z-index: 1;
-
-}
-
-.NavigationMenuContent {
-  position: absolute;
-  /* z-index: 1; */
-  top: 0;
-  left: 0;
-  width: 100%;
-  animation-duration: 250ms;
-  animation-timing-function: ease;
-}
-.NavigationMenuContent[data-motion='from-start'] {
-  animation-name: enterFromLeft;
-}
-.NavigationMenuContent[data-motion='from-end'] {
-  animation-name: enterFromRight;
-}
-.NavigationMenuContent[data-motion='to-start'] {
-  animation-name: exitToLeft;
-}
-.NavigationMenuContent[data-motion='to-end'] {
-  animation-name: exitToRight;
-}
-
-.ViewportPosition {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  top: 100%;
-  left: 0;
-  perspective: 2000px;
-}
-
-.NavigationMenuViewport {
-  position: relative;
-  width: var(--radix-navigation-menu-viewport-width);
-  height: var(--radix-navigation-menu-viewport-height);
-  transition: width, height, 250ms ease;
-}
-
-@keyframes enterFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(200px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes enterFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-200px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes exitToRight {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(200px);
-  }
-}
-
-@keyframes exitToLeft {
-  from {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateX(-200px);
   }
 }

@@ -1,4 +1,4 @@
-import type { LinksFunction } from "@remix-run/node";
+import type { LinksFunction, LoaderFunction } from "@remix-run/node";
 import { cssBundleHref } from '@remix-run/css-bundle';
 import blackColorAStyle from "@radix-ui/colors/black-alpha.css"
 import blueColorStyle from "@radix-ui/colors/blue.css";
@@ -15,6 +15,12 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import { rootAuthLoader } from "@clerk/remix/ssr.server";
+import { ClerkApp, ClerkErrorBoundary } from "@clerk/remix";
+
+export const ErrorBoundary = ClerkErrorBoundary();
+export const loader: LoaderFunction = (args) => rootAuthLoader(args);
+
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [
     { rel: 'stylesheet', href: cssBundleHref },
@@ -25,7 +31,9 @@ export const links: LinksFunction = () => [
   ] : []),
 ];
 
-export default function App() {
+
+
+function App() {
   return (
     <html lang="en">
       <head>
@@ -44,3 +52,6 @@ export default function App() {
     </html>
   );
 }
+
+export default ClerkApp(App);
+

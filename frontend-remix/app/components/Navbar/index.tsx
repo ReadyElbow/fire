@@ -29,61 +29,45 @@ function GenerateSubMenu(props: TSubMenu){
 
 const RadixNavigationMenu = () => {
   return (
-    <NavigationMenu.Root className={styles.NavigationMenuRoot}>
-      <NavigationMenu.List>
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger>Item one</NavigationMenu.Trigger>
-          <NavigationMenu.Content className={styles.NavigationMenuContent}>
-            Item one content
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger>Item two</NavigationMenu.Trigger>
-          <NavigationMenu.Content className={styles.NavigationMenuContent}>
-            Item 2
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-      </NavigationMenu.List>
-      <div className={styles.ViewportPosition}>
+  <NavigationMenu.Root className={styles.navMenuRoot}>
+    <NavigationMenu.List className={styles.navMenuList}>
+      <NavigationMenu.Item>
+        <NavLink
+          to="/"
+          className={styles.NavMenuTrigger}
+        >
+          Home
+        </NavLink>
+      </NavigationMenu.Item>
+      <NavigationMenu.Item>
+        <NavigationMenu.Trigger className={styles.NavMenuTrigger}>
+          Learn <ChevronDownIcon className={styles.NavMenuChevron} aria-hidden />
+        </NavigationMenu.Trigger>
+        <NavigationMenu.Content className={styles.NavMenuContent}>
+          <GenerateSubMenu items={RecordSubMenu} />
+        </NavigationMenu.Content>
+      </NavigationMenu.Item>
+
+    </NavigationMenu.List>
+    <div className={styles.ViewportPosition}>
         <NavigationMenu.Viewport className={styles.NavigationMenuViewport} />
       </div>
-    </NavigationMenu.Root>
-    // <NavigationMenu.Root className={styles.NavMenuRoot}>
-    //   <NavigationMenu.List className={styles.NavMenuList}>
-    //     <NavigationMenu.Item>
-    //       <NavigationMenu.Trigger className={styles.NavMenuTrigger} >
-    //         Github <ChevronDownIcon className={styles.NavMenuChevron}></ChevronDownIcon>
-    //       </NavigationMenu.Trigger>
-    //       <NavigationMenu.Content className={styles.NavMenuContent}>
-    //         <GenerateSubMenu items={RecordSubMenu}/>
-    //       </NavigationMenu.Content>
-    //     </NavigationMenu.Item>
-    //     <NavigationMenu.Item>
-    //       <NavigationMenu.Link className={styles.NavMenuTrigger}>
-    //         Github
-    //       </NavigationMenu.Link>
-    //     </NavigationMenu.Item>
-
-    //   </NavigationMenu.List>
-    //   <div className={styles.ViewportPosition}>
-    //     <NavigationMenu.Viewport className={styles.NavigationMenuViewport}/>
-    //   </div>
-    // </NavigationMenu.Root>
+  </NavigationMenu.Root>
   )
 }
 
 export default function Navbar() {
   return (
   <header className={styles.header}>
+    <div className={styles.headerTop}>
+      <h1 className={styles.headerTitle}>FIRE</h1>
       <div>
-        <h1>Fire 🔥</h1>
+          <Button title="Configure"/>
       </div>
-      <div>
-        < RadixNavigationMenu />
-      </div>
-      <div>
-        <Button title="Test"/>
-      </div>
+    </div>
+    <div className={styles.headerNavbar}>
+      <RadixNavigationMenu></RadixNavigationMenu>
+    </div>
   </header>
 )} 
 

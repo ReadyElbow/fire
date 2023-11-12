@@ -1,14 +1,20 @@
 @font-face {
-    font-family: NotoSans;
-    src: url("public/Noto_Sans/NotoSans-Medium.ttf");
+    font-family: GeistRegular;
+    src: url("public/Geist/Geist-Regular.otf");
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: GeistBold;
+    src: url("public/Geist/Geist-Bold.otf");
     font-style: normal;
     font-display: swap;
 }
 
 * {
-    font-family: NotoSans;
+    font-family: GeistRegular;
 }
 
 h1 {
-    font-size: 3rem;
+    font-family: GeistBold;
 }
