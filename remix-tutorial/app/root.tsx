@@ -17,20 +17,14 @@ import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import appStylesHref from "./app.css";
 import { createEmptyContact, getContacts } from "./data";
 import { useEffect } from "react";
+import type { LoaderFunction } from "@remix-run/node";
+import { rootAuthLoader } from "@clerk/remix/ssr.server";
+import { ClerkApp, ClerkErrorBoundary } from "@clerk/remix";
 
+export const loader: LoaderFunction = (args) => rootAuthLoader(args);
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: appStylesHref }
 ]
-
-// Used on first page load?
-export const loader = async ({
-  request,
-}: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-  const q = url.searchParams.get("q");
-  const contacts = await getContacts(q);
-  return json({ contacts, q });
-};
 
 // Form post requests hint to Remix that it should revalidate the 
 // data on the page hence it does a quick refresh of the page
@@ -39,8 +33,7 @@ export const action = async () => {
   return redirect(`/contacts/${contact.id}/edit`);
 };
 
-
-export default function App() {
+function App() {
   const { contacts, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
   const submit = useSubmit();
@@ -66,79 +59,8 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div id="sidebar">
-          <h1>Remix Contacts</h1>
-          <div>
-          <Form
-              id="search-form"
-              onChange={(event) => {
-                const isFirstSearch = q === null;
-                submit(event.currentTarget, {
-                  replace: !isFirstSearch,
-                });
-              }}
-              role="search"
-            >
-              <input
-                id="q"
-                aria-label="Search contacts"
-                className={searching ? "loading" : ""}
-                placeholder="Search"
-                type="search"
-                name="q"
-                defaultValue={q || ""}
-              />
-              <div 
-                id="search-spinner" 
-                aria-hidden 
-                hidden={!searching}
-              />
-            </Form>
-            <Form method="post">
-              <button type="submit">New</button>
-            </Form>
-          </div>
-          <nav>
-            {contacts.length ? (
-              <ul>
-                {contacts.map((contact) => (
-                  <li key={contact.id}>
-                    <NavLink
-                      className={({ isActive, isPending }) =>
-                        isActive
-                          ? "active"
-                          : isPending
-                          ? "pending"
-                          : ""
-                      }
-                      to={`contacts/${contact.id}`}
-                    >
-                      {contact.first || contact.last ? (
-                        <>
-                          {contact.first} {contact.last}
-                        </>
-                      ) : (
-                        <i>No Name</i>
-                      )}{" "}
-                      {contact.favorite ? (
-                        <span>★</span>
-                      ) : null}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>
-                <i>No contacts</i>
-              </p>
-            )}
-          </nav>
-        </div>
-        <div 
-          id="detail"
-          className={
-            navigation.state === "loading" ? "loading" : ""
-          }
+        
+        <div
         >
           <Outlet />
         </div>
@@ -150,3 +72,6 @@ export default function App() {
     </html>
   );
 }
+
+export const ErrorBoundary = ClerkErrorBoundary();
+export default ClerkApp(App);
