@@ -1,9 +1,5 @@
-// app/routes/resources/customers.tsx
-import { SignIn, SignUp, UserButton } from '@clerk/remix';
-import { createClerkClient } from '@clerk/remix/api.server';
-import { getAuth } from '@clerk/remix/ssr.server';
 import { LoaderFunctionArgs, json } from '@remix-run/node'
-import { useLoaderData, NavLink } from '@remix-run/react';
+import { useLoaderData, NavLink, useFetcher } from '@remix-run/react';
 import styles from "./styles.module.css";
 import Button from "~/components/Button";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
@@ -11,21 +7,25 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
  
 import { RecordSubMenu } from './subMenus';
+import { useEffect, useState } from 'react';
 
-export async function loader(args: LoaderFunctionArgs) {
-  const { userId } = await getAuth(args);
-  if (!userId) {
-      return null
-  }
-  const user = await createClerkClient({secretKey: process.env.CLERK_SECRET_KEY}).users.getUser(userId);
-  if (!user.privateMetadata.apiKeys) {
-    return {}
-  } else {
-    for (const key of Object.keys(user.privateMetadata.apiKeys)) {
-      user.privateMetadata.apiKeys[key] = "*********"
-    }
-    return user.privateMetadata.apiKeys
-  }
+export async function loader({ request }: LoaderFunctionArgs) {
+  return json({"apiKeys":{}})
+  // const { userId } = await getAuth(args);
+  // if (!userId) {
+  //     return null
+  // }
+  // const user = await createClerkClient({secretKey: process.env.CLERK_SECRET_KEY}).users.getUser(userId);
+  // if (!user.privateMetadata.apiKeys) {
+  //   return {"apiKeys": {}}
+  // } else {
+  //   for (const key of Object.keys(user.privateMetadata.apiKeys)) {
+  //     user.privateMetadata.apiKeys[key] = "*********"
+  //   }
+  //   return {
+  //     "apiKeys": user.privateMetadata.apiKeys
+  //   }
+  // }
 }
 
 type SubMenuProps = {
@@ -68,6 +68,8 @@ const RadixNavigationMenu = () => {
         >
           Home
         </NavLink>
+      </NavigationMenu.Item>
+      <NavigationMenu.Item>
         <NavLink
           to="/dashboard"
           className={styles.NavMenuTrigger}
@@ -110,30 +112,49 @@ function RadixDialogBox(props:AuthComponent) {
   )
 }
 
-export default function Navbar() {
-  const userData = useLoaderData<typeof loader>();
-  console.log(userData)
+export function Navbar() {
+  const [loaded, setLoading] = useState(true);
+  const [isAuthenticated, setAuthenticated] = useState(false);
+  let userFetcher = useFetcher<typeof loader>();
+  useEffect(() => {
+    if (userFetcher.state === "idle" && userFetcher.data == null) {
+      userFetcher.load("/header");
+      setAuthenticated(true)
+    }
+  }, [userFetcher]);
+  // useEffect(() => {
+  //   if (userFetcher.state === "idle" && userFetcher.data == null) {
+  //     userFetcher.load("/header");
+  //   }
+  //   console.log(userFetcher)
+  //   const userData = userFetcher.data?.apiKeys ?? null
+  //   if (userData) {
+  //     setAuthData({
+  //       "authenticated": true,
+  //       "apiKeys": "test"
+  //     })
+  //   }
+  // }, [])
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
         <h1 className={styles.headerTitle}>FIRE</h1>
         <div>
             {
-                userData ? 
+                isAuthenticated ?
                     <>
                         <Button title="Configure"/>
-                        <UserButton signInUrl="/"></UserButton> 
                     </>
                     :
                     <>
-                        <RadixDialogBox title="Sign In" component={<SignIn/>}></RadixDialogBox>
-                        <RadixDialogBox title="Sign Up" component={<SignUp/>}></RadixDialogBox>
+                        <RadixDialogBox title="Sign In" component={<>"hi"</>}></RadixDialogBox>
+                        <RadixDialogBox title="Sign Up" component={<>"hi"</>}></RadixDialogBox>
                     </>
             }
         </div>
       </div>
       {
-        userData &&
+        isAuthenticated  &&
         <div className={styles.headerNavbar}>
           <RadixNavigationMenu></RadixNavigationMenu>
         </div>}
