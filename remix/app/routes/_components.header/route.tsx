@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import Button from "~/components/Button";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ChevronDownIcon } from "@radix-ui/react-icons";
+import { ChevronDownIcon, UpdateIcon } from "@radix-ui/react-icons";
  
 import { RecordSubMenu } from './subMenus';
 import { useEffect, useState } from 'react';
@@ -113,13 +113,14 @@ function RadixDialogBox(props:AuthComponent) {
 }
 
 export function Navbar() {
-  const [loaded, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setAuthenticated] = useState(false);
   let userFetcher = useFetcher<typeof loader>();
   useEffect(() => {
     if (userFetcher.state === "idle" && userFetcher.data == null) {
       userFetcher.load("/header");
       setAuthenticated(true)
+      setLoading(false)
     }
   }, [userFetcher]);
   // useEffect(() => {
@@ -135,22 +136,26 @@ export function Navbar() {
   //     })
   //   }
   // }, [])
+  let AuthBar = <>
+    <RadixDialogBox title="Sign In" component={<>"hi"</>}></RadixDialogBox>
+    <RadixDialogBox title="Sign Up" component={<>"hi"</>}></RadixDialogBox>
+  </>
+  if (isAuthenticated) {
+    AuthBar = <>
+      <Button title="Configure"/>
+    </>
+  }
   return (
     <header className={styles.header}>
       <div className={styles.headerTop}>
         <h1 className={styles.headerTitle}>FIRE</h1>
         <div>
             {
-                isAuthenticated ?
-                    <>
-                        <Button title="Configure"/>
-                    </>
-                    :
-                    <>
-                        <RadixDialogBox title="Sign In" component={<>"hi"</>}></RadixDialogBox>
-                        <RadixDialogBox title="Sign Up" component={<>"hi"</>}></RadixDialogBox>
-                    </>
-            }
+              loading ?
+                <UpdateIcon/>
+                :
+                AuthBar
+              }
         </div>
       </div>
       {

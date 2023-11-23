@@ -6,10 +6,9 @@ import { jobs } from './jobs/jobs';
 import { budgeting } from './budgeting/budgeting';
 import { transactions } from './transactions/transactions';
 
-export const db_connection = new Database('./assets/financial_database.sqlite', { create: true });
+export const db_connection = new Database('financial_database.sqlite', { create: true });
 // db_connection.exec("PRAGMA journal_mode = WAL;");
 db_connection.exec("PRAGMA foreign_keys = ON;");
-
 // Check if any tables have been created in the database
 const table_count = db_connection.query("SELECT name FROM sqlite_schema WHERE type='table'").values();
 if (table_count.length === 0) {
@@ -35,4 +34,9 @@ app.route('/accounts', accounts)
 app.route('/jobs', jobs)
 app.route('/budgeting', budgeting)
 app.route('/transactions', transactions)
-export default app
+export type AppType = typeof app;
+
+export default {
+    port: 6000,
+    fetch: app.fetch,
+  }

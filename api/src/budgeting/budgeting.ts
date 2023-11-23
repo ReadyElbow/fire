@@ -29,14 +29,14 @@ const requestBudget = z.object({
 })
 
 
-const mappingsFile = Bun.file("./assets/mappings.json", { type: "application/json" });
-if (mappingsFile.size == 0)
-    Bun.write(mappingsFile, '{}');
+const mappingsFile = Bun.file("mappings.json", { type: "application/json" });
+if (mappingsFile.size == 0) {
+    await Bun.write(mappingsFile, '{}');
+}
 interface Mappings {
     [key: string]: string
 }
 let mappingsObject:Mappings = await mappingsFile.json()
-
 export const budgeting = new Hono()
 
 // Add new mappings

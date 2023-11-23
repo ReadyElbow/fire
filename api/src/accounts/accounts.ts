@@ -4,6 +4,16 @@ import { z } from "zod";
 import { validator } from 'hono/validator'
 import { db_connection } from '../index';
 
+type Accounts = {
+    accountID: number,
+    provider: string,
+    bankAccountNumber: string,
+    bankAccountSortCode: string,
+    bankAccountType: string,
+    interestRate: number,
+    balance: number
+}[]
+
 const AccountValidator = z.object({
     provider: z.string().toUpperCase().trim(),
     bankAccountNumber: z.string().trim(),
@@ -23,13 +33,14 @@ export const accounts = new Hono()
 
 accounts.get('/', (c) => {
     try {
-        const accounts = db_connection.query(`SELECT * FROM 'accounts'`).all();
-        return c.json(accounts);
+        const accounts = db_connection.query(`SELECT * FROM 'accounts'`).all() as Accounts;
+        return c.jsonT(accounts);
     } catch (err) {
         console.log(err)
         return c.text("Unknown Error", 500)
     }
 });
+
 
 // Add a new account to accounts table
 accounts.post('/add', 
