@@ -1,0 +1,16 @@
+.dashboardGrid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.accounts {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    padding: 1rem;
+}
+
+.accountCardSection {
+    display: flex;
+    justify-content: flex-start;
+}

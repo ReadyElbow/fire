@@ -15,14 +15,16 @@ export const DEBT_BUDGET = `
     CREATE TABLE IF NOT EXISTS debtBudget (
         date TEXT NOT NULL,
         budgetCategory TEXT NOT NULL,
+        amount REAL NOT NULL,
+        percentage REAL NOT NULL,
+        notes TEXT NOT NULL,
         debtName TEXT NOT NULL,
         PRIMARY KEY (date, budgetCategory),
         FOREIGN KEY (debtName) REFERENCES debtSummary (debtName),
-        FOREIGN KEY (date, budgetCategory) REFERENCES budget (date, budgetCategory)
     );
 `;
 
-export const BUDGET = `
+export const EXPENSE_BUDGET = `
     CREATE TABLE IF NOT EXISTS budget (
         date TEXT NOT NULL,
         budgetCategory TEXT NOT NULL,
@@ -37,10 +39,12 @@ export const SAVINGS_BUDGET = `
     CREATE TABLE IF NOT EXISTS savingsBudget (
         date TEXT NOT NULL,
         budgetCategory TEXT NOT NULL,
+        amount REAL NOT NULL,
+        percentage REAL NOT NULL,
+        notes TEXT NOT NULL,
         accountID INTEGER NOT NULL,
         PRIMARY KEY (date, budgetCategory),
         FOREIGN KEY (accountID) REFERENCES accounts (accountID),
-        FOREIGN KEY (date, budgetCategory) REFERENCES budget (date, budgetCategory)
     );
 `;
 

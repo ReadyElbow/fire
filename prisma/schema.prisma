@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Accounts {
+  id                  Int @id @default(autoincrement())
+  provider            String
+  bankAccountNumber   Int
+  bankAccountSortCode String
+  bankAccountType     String
+  interestRate        Float
+  balance             Float
+  updatedAt           DateTime @updatedAt
+  savingsBudget       SavingsBudget[]
+  transactions        BankTransactions[]
+}
+
+model BankTransactions {
+  id                      Int @id @default(autoincrement())
+  date                    DateTime
+  description             String
+  notes                   String
+  amount                  Float
+  balanceAfterTransaction Float
+  transactionCategory     TransactionCategories?
+  account                 Accounts @relation(fields: [accountID], references: [id])
+  accountID               Int
+}
+
+model TransactionCategories {
+  id              Int @id
+  budgetCategory  String
+  date            DateTime
+  transaction     BankTransactions @relation(fields: [id], references: [id])
+  budget          ExpenseBudget @relation(fields: [budgetCategory, date], references: [budgetCategory, date])
+}
+
+model JobHistory {
+  jobTitle  String
+  employer  String
+  activeJob Boolean @default(true)
+  startDate DateTime
+  endDate   DateTime?
+  type      String
+  salary    Float
+  @@id([jobTitle, employer])
+}
+
+model Debts {
+  name          String @id
+  type          String
+  description   DateTime
+  interestRate  Float
+  amountOwed    Float
+  dueDate       DateTime
+  budget        DebtBudget[]
+}
+
+model ExpenseBudget {
+  date                DateTime
+  budgetCategory      String
+  amount              Float
+  percentage          Float
+  notes               String
+  mappedTransactions  TransactionCategories[]
+  debtBudget          DebtBudget?
+  savingsBudget       SavingsBudget?
+  @@id([date, budgetCategory])
+}
+
+model DebtBudget {
+  date            DateTime
+  budgetCategory  String
+  expenseBudget   ExpenseBudget @relation(fields: [date, budgetCategory], references: [date, budgetCategory])
+  debts           Debts @relation(fields: [debtName], references: [name])
+  debtName        String
+  @@id([date, budgetCategory])
+}
+
+model SavingsBudget {
+  date            DateTime
+  budgetCategory  String
+  expenseBudget   ExpenseBudget @relation(fields: [date, budgetCategory], references: [date, budgetCategory])
+  accounts        Accounts @relation(fields: [accountID], references: [id])
+  accountID       Int
+  @@id([date, budgetCategory])
+}
