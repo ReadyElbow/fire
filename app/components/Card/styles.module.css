@@ -1,0 +1,26 @@
+.Card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: center;
+  padding: 1rem;
+  border: 1px;
+  border-style: solid;
+  border-color: var(--blue-3);
+  border-radius: 3%;
+}
+
+.CardTitle {
+
+}
+
+
+.InteractiveCard {
+    composes: Card;
+    transition: all 500ms ease;
+}
+
+.InteractiveCard:hover,
+.InteractiveCard:focus {
+  background-color: var(--blue-5);
+}

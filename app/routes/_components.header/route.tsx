@@ -66,7 +66,7 @@ const RadixNavigationMenu = () => {
           to="/"
           className={styles.NavMenuTrigger}
         >
-          Home
+          <h4>Home</h4>
         </NavLink>
       </NavigationMenu.Item>
       <NavigationMenu.Item>

@@ -22,7 +22,7 @@ model Accounts {
 
 model BankTransactions {
   id                      Int @id @default(autoincrement())
-  date                    DateTime
+  transactionDate         DateTime
   description             String
   notes                   String
   amount                  Float

@@ -3,16 +3,17 @@ CREATE TABLE "Accounts" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "provider" TEXT NOT NULL,
     "bankAccountNumber" INTEGER NOT NULL,
-    "bankAccountSortCode" INTEGER NOT NULL,
+    "bankAccountSortCode" TEXT NOT NULL,
     "bankAccountType" TEXT NOT NULL,
     "interestRate" REAL NOT NULL,
-    "balance" REAL NOT NULL
+    "balance" REAL NOT NULL,
+    "updatedAt" DATETIME NOT NULL
 );
 
 -- CreateTable
 CREATE TABLE "BankTransactions" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "date" DATETIME NOT NULL,
+    "transactionDate" DATETIME NOT NULL,
     "description" TEXT NOT NULL,
     "notes" TEXT NOT NULL,
     "amount" REAL NOT NULL,

@@ -1,3 +1,8 @@
+/* supporting colours are those for drawring attention to the user */
+/* Green for Positve */
+/* Yeelow Orange for warning */
+/* Red for danger */
+/* Blue for neutral informational messages */
 
 html {
     box-sizing: border-box;
@@ -10,4 +15,9 @@ html {
 
 * {
     margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }

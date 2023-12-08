@@ -4,14 +4,14 @@
   min-width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: var(--blue-1);
+  background-color: var(--blue-3);
 }
 
 .headerTitle {
   padding-left: 1rem;
-  font-size: 4em;
+  /* font-size: 4em; */
   font-weight: 900;
-  color: var(--blue-11);
+  color: var(--blue-9);
 }
 
 .headerTop {

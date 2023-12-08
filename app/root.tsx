@@ -10,14 +10,20 @@ import {
 } from "@remix-run/react";
 import { Navbar } from "./routes/_components.header/route";
 import blackColorAStyle from "@radix-ui/colors/black-alpha.css"
-import blueColorStyle from "@radix-ui/colors/blue.css";
+import blueColors from "@radix-ui/colors/blue.css";
+import greenColors from "@radix-ui/colors/green.css";
+import orangeColors from "@radix-ui/colors/orange.css"
+import redColors from "@radix-ui/colors/tomato.css"
 import fontStyle from "./styles/fonts.css"
 import generalStyle from "./styles/general.css"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [
     { rel: "stylesheet", href: cssBundleHref },
-    { rel: "stylesheet", href: blueColorStyle},
+    { rel: "stylesheet", href: blueColors},
+    { rel: "stylesheet", href: greenColors},
+    { rel: "stylesheet", href: orangeColors},
+    { rel: "stylesheet", href: redColors},
     { rel: "stylesheet", href: blackColorAStyle},
     { rel: "stylesheet", href: fontStyle},
     { rel: "stylesheet", href: generalStyle}

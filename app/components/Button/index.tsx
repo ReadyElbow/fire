@@ -1,18 +1,11 @@
-import type { LinksFunction } from "@remix-run/node"; 
-import blueColors from "@radix-ui/colors/blue.css"
+import type { LinksFunction } from "@remix-run/node";
 import styles from "./styles.module.css";
+import { ReactNode } from "react";
 
-export const links: LinksFunction = () => [
-    { rel: 'stylesheet', href: blueColors }
-  ]
 
- 
-interface ButtonProps {
-    title: string
-}
 
-export default function Button(props: ButtonProps) {
+export default function Button(props: {content:Iterable<ReactNode>}) {
     return (
-        <button className={styles.Button}>{props.title}</button>
+        <button className={styles.Button}>{props.content}</button>
     )
 }
