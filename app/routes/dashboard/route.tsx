@@ -7,7 +7,7 @@ import { Accounts, Prisma } from "@prisma/client"
 import { monthlySummaryByAccount } from "~/utils/db_methods/transactions"
 import { NetworthSummaryGraph } from "./networthSummary"
 import { NivoContainer } from "~/components/NivoContainer"
-
+import { Card, InteractiveCard } from "~/components/Card"
 
 type HighLevelAccounts = Prisma.PromiseReturnType<typeof fetchHighLevelAccountsDetails>
 
@@ -48,30 +48,19 @@ function AccountsBreakdown(props: {accounts:SerializeFrom<HighLevelAccounts>}) {
 }
 
 function AccountCard(props: {account:any}) {
-    return <Link to={`/accounts/${props.account.id}`} key={props.account.id}>
-            <div className={cardStyles.InteractiveCard}>
-                <div className={cardStyles.CardTitle}>
-                    <h4>
-                        {props.account.provider}
-                    </h4>
-                    <p className={styles.accountCardAccountDetails}>
-                        {props.account.bankAccountNumber}, {props.account.bankAccountSortCode}
-                    </p>
-                <br />
-                </div>
-                <div>
-                    <h2>
-                        £{props.account.balance}
-                    </h2>
-                <br />
-                </div>
-                <div>
-                    <p>
-                        Last updated {Math.round((Date.now() - Date.parse(props.account.updatedAt))/ (24 * 60 * 60 * 1000))} days ago
-                    </p>
-                </div>
-            </div>
-        </Link>
+    const title = <>
+        <h4>{props.account.provider}</h4>
+        <p className={styles.accountCardAccountDetails}>
+            {props.account.bankAccountNumber}, {props.account.bankAccountSortCode}
+        </p>
+    </>
+    const body  = <>
+        <h2>£{props.account.balance}</h2>
+    </>
+    const footer = <>
+        <p>Last updated {Math.round((Date.now() - Date.parse(props.account.updatedAt))/ (24 * 60 * 60 * 1000))} days ago</p>
+    </>
+    return <InteractiveCard title={title} body={body} footer={footer} to={`/accounts/${props.account.id}`}/>
     // accountCards.push(
     //     <Link to={`/accounts/add`}>
     //         <div className={cardStyles.InteractiveCard} style={{padding: "3rem"}}>
