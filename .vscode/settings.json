@@ -1,0 +1,4 @@
+{
+    "biome.requireConfiguration": false,
+    "typescript.tsdk": "node_modules/typescript/lib"
+}

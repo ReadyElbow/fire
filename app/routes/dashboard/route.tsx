@@ -7,8 +7,8 @@ import { Accounts, Prisma } from "@prisma/client"
 import { monthlySummaryByAccount } from "~/utils/db_methods/transactions"
 import { NetworthSummaryGraph } from "./networthSummary"
 import { NivoContainer } from "~/components/NivoContainer"
-import { Card, InteractiveCard } from "~/components/Card"
-import { Lloyds_Banking } from "public/Banking Logos"
+import { InteractiveCard } from "~/components/Card"
+import { mapBankLogo } from "~/utils/bankingLogos"
 type HighLevelAccounts = Prisma.PromiseReturnType<typeof fetchHighLevelAccountsDetails>
 
 
@@ -28,18 +28,17 @@ function AccountsBreakdown(props: {accounts:SerializeFrom<HighLevelAccounts>}) {
     }
     let accountTypeBreakdown:TAccountTypeBreakdown = {}
     for (const account of props.accounts) {
-        console.log(account)
         if (accountTypeBreakdown[account.bankAccountType]) {
-            accountTypeBreakdown[account.bankAccountType].push(<AccountCard account={account}/>)
+            accountTypeBreakdown[account.bankAccountType].push(<AccountButton account={account}/>)
         } else {
-            accountTypeBreakdown[account.bankAccountType] = [<AccountCard account={account}/>]
+            accountTypeBreakdown[account.bankAccountType] = [<AccountButton account={account}/>]
         }
     }
     return <>
         {Object.entries(accountTypeBreakdown).map(([key,value]) => {
             return <div key={key}>
                 <h2>{key}</h2>
-                <div className={styles.accountCardSection}>
+                <div className={styles.accountLinkSection}>
                     {value}
                 </div>
             </div>
@@ -47,13 +46,22 @@ function AccountsBreakdown(props: {accounts:SerializeFrom<HighLevelAccounts>}) {
     </>
 }
 
+function AccountButton(props: {account: any}) {
+    return <Link to={`/accounts/${props.account.id}`} className={styles.accountLink}>
+        <div>
+            {mapBankLogo(props.account.provider)}
+            <h6 className={styles.accountAccountDetails}>{props.account.bankAccountNumber}, {props.account.bankAccountSortCode}</h6>
+        </div>
+        <h3>£{props.account.balance}</h3>
+    </Link>
+}
+
 function AccountCard(props: {account:any}) {
     const title = <>
-        {/* <h4>{props.account.provider}</h4> */}
-        <img src={Lloyds_Banking} alt="" />
-        <p className={styles.accountCardAccountDetails}>
+        {mapBankLogo(props.account.provider)}
+        <h4 className={styles.accountCardAccountDetails}>
             {props.account.bankAccountNumber}, {props.account.bankAccountSortCode}
-        </p>
+        </h4>
     </>
     const body  = <>
         <h2>£{props.account.balance}</h2>

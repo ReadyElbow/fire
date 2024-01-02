@@ -1,0 +1,19 @@
+.subNavSeparate[data-orientation="vertical"] {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  width: 1px;
+  background-color: var(--blue-6);
+}
+
+.subNavLink, .subNavButton {
+  color: var(--black-a11);
+}
+
+.subNavButton {
+  background-color: inherit;
+}
+
+.subNavLink a.active {
+  color: var(--blue-10);
+}
+

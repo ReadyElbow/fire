@@ -1,0 +1,79 @@
+.accounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.accountCardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.createDialogOverlay {
+  background-color: var(--black-a4);
+  position: fixed;
+  inset: 0;
+}
+.createDialogContent {
+  background-color: white;
+  border-radius: 0.5rem;
+  position: fixed;
+  /* Setting the location when it appears to be middle of page */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 450px;
+  max-height: 85vh;
+  padding: 1rem;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+}
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.0);
+  }
+}
+
+.createDialogForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.createDialogFormRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.createDialogActions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.createDialogForm select, input {
+  padding: 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--black-a4);
+}
+
+.spinningIcon {
+  animation: rotation 1.2s infinite ease-in-out;
+}
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

@@ -10,11 +10,33 @@
     font-style: normal;
     font-display: swap;
 }
+@font-face {
+    font-family: GeistSemiBold;
+    src: url("public/Geist/Geist-SemiBold.otf");
+    font-style: normal;
+    font-display: swap;
+}
+
 
 * {
     font-family: GeistRegular;
 }
 
 h1 {
-    font-family: GeistBold;
+    font-family: GeistRegular;
+    font-size: 2.5rem;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: GeistRegular;
+    font-weight: 500;
+}
+
+.backgroundText {
+    font-weight: 300;
+    color: var(--gray-11);
+}
+
+.errorText {
+    color: var(--tomato-11);
 }

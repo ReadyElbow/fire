@@ -7,6 +7,9 @@
 html {
     box-sizing: border-box;
 }
+body {
+    /* height: 100%; */
+}
 *,
 *:before,
 *:after {
@@ -23,5 +26,5 @@ a {
 }
 
 body {
-    background-color: var(--black-a1);
+    background-color: var(--gray-1);
 }
