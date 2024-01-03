@@ -59,11 +59,15 @@
   justify-content: space-between;
 }
 
-.createDialogForm select,
-input {
+.createDialogFormRowContainer {
   padding: 0.5rem;
   border-radius: 1rem;
   border: 1px solid var(--black-a4);
+}
+
+.createDialogFormRowContainer input {
+  all: unset;
+  width: 100%;
 }
 
 .spinningIcon {

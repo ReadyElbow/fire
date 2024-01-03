@@ -1,16 +1,16 @@
 .contentGrid {
-    display: grid;
-    grid-template-columns: 0.3fr [center] 1fr [end] 0.3fr;
-    grid-auto-rows: auto;
-    row-gap: 3rem;
+  display: grid;
+  grid-template-columns: 0.3fr [center] 1fr [end] 0.3fr;
+  grid-auto-rows: auto;
+  row-gap: 3rem;
 }
 
 .contentArea {
-    grid-column: center / end ;
-    background-color: white;
-    padding: 3rem;
-    border-radius: 6px;
-    box-shadow: 0px 0px 10px 10px var(--black-a2);
+  grid-column: center / end;
+  background-color: white;
+  padding: 3rem;
+  border-radius: 6px;
+  box-shadow: 0px 0px 10px 10px var(--black-a2);
 }
 
 .contentArea button,
@@ -18,26 +18,23 @@ h3 {
   all: unset;
 }
 
-
 .gettingStartedRoot {
-    width: 100%;
-    border-radius: 2%;
-    background-color: aliceblue;
+  width: 100%;
+  border-radius: 2%;
+  background-color: aliceblue;
 }
 
-
 .gettingStartedItem {
-    overflow: hidden;
-    margin-top: 1px;
-  }
-  
+  overflow: hidden;
+  margin-top: 1px;
+}
 
 .features {
-    display: flex;
-    padding: 2rem;
-    gap: 1rem;
+  display: flex;
+  padding: 2rem;
+  gap: 1rem;
 }
 
 .featuresDescription {
-    color: var(--black-a8);
+  color: var(--black-a8);
 }

@@ -33,13 +33,13 @@ export function InteractiveCard(props: {
     </>
     if (props.overwriteStyle) {
         return (
-                <div className={style.Card} style={props.overwriteStyle}>
-                    <Link to={props.to}>
-                        <div className={style.CardContent}>
-                            {card}
-                        </div>
-                    </Link>
-                </div>
+            <div className={style.Card} style={props.overwriteStyle}>
+                <Link to={props.to}>
+                    <div className={style.CardContent}>
+                        {card}
+                    </div>
+                </Link>
+            </div>
         )
     } else {
         return (
@@ -48,8 +48,8 @@ export function InteractiveCard(props: {
                     <div className={style.CardContent}>
                         {card}
                     </div>
-                </Link>  
-            </div>          
+                </Link>
+            </div>
         )
     }
 }

@@ -1,13 +1,10 @@
 import { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { NavLink, Outlet, useLoaderData } from "@remix-run/react";
-import { mapBankLogo } from "~/utils/bankingLogos";
+import { BankLogo } from "~/utils/bankingLogos";
 import { prisma } from "~/utils/prisma.server";
-import pageStyle from "~/styles/page_overview.css"
-import * as Separator from '@radix-ui/react-separator';
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: pageStyle },
-];
+import { SubNavigation } from "~/components/SubNavigation/subnav";
+import headerStyle from "~/styles/pageHeader.module.css"
+import { HeaderLayout } from "~/components/PageHeader/header";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
@@ -21,22 +18,26 @@ export async function loader({ params }: LoaderFunctionArgs) {
     console.log(e)
     return { account: null };
   }
-} 
+}
 
 
 const subPages = [
-    {
-        name: "Overview",
-        to: ""
-    },
-    {
-        name: "Back",
-        to: "overwritten"
-    },
-    {
-        name: "Add Transactions",
-        to: "/add_transactions"
-    },
+  {
+    name: "Overview",
+    to: ""
+  },
+  {
+    name: "Back",
+    to: "overwritten"
+  },
+  {
+    name: "Transactions",
+    to: "/transactions"
+  },
+  {
+    name: "Add Transactions",
+    to: "/add_transactions"
+  },
 
 ]
 
@@ -49,32 +50,23 @@ export default function AccountLayout() {
   const renderedSubPages = subPages.map((page) => {
     let to = `/accounts/${data.account?.id}${page.to}`
     if (page.name === "Back") {
-        to = "/accounts"
+      to = "/accounts"
     }
     return <>
-        <NavLink
-            to={to}
-            end={page.name === "Back"}
-            className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "active" : ""
-            }
-        >
-            {page.name}
-        </NavLink>
-        <Separator.Root className="SeparatorRoot" orientation="vertical"  />
+      <SubNavigation
+        to={to}
+        end={page.name === "Back" || page.name === "Overview"}
+        name={page.name}
+      />
     </>
   })
 
-  return (
-    <>
-      <div className="pageHeadings">
-        <h2>{mapBankLogo(data.account.provider, 200)}</h2>
-        <h3 className="backgroundText">{data.account.bankAccountNumber}, {data.account.bankAccountSortCode}</h3>
-        <div className="subPages">
-            {renderedSubPages}
-        </div>
-      </div>
+  return <>
+      <HeaderLayout
+        title={<div style={{ display: "flex", alignItems: "center", gap: "0.2rem", height: "3em"}}><BankLogo provider={data.account.provider} height="90%" /><h1>{data.account.provider.split(" ")[0]}</h1></div>}
+        subTitle={`${data.account.bankAccountNumber}, ${data.account.bankAccountSortCode}`}
+        subPages={renderedSubPages}
+      />
       <Outlet />
-    </>
-  );
+    </>;
 }

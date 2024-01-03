@@ -29,7 +29,7 @@ async function main() {
   })
 
   for (let i = 0; i < 1000; i++) {
-    const date = faker.date.past({years:1});
+    const date = faker.date.past({ years: 1 });
     await prisma.bankTransactions.create({
       data: {
         transactionDate: date,
@@ -37,11 +37,11 @@ async function main() {
         notes: "",
         amount: parseFloat(faker.finance.amount()),
         balanceAfterTransaction: parseFloat(faker.finance.amount()),
-        accountID: faker.number.int({ min:1, max:2})
+        accountID: faker.number.int({ min: 1, max: 2 })
       }
     })
   }
-  
+
 }
 main()
   .then(async () => {

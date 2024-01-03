@@ -23,16 +23,16 @@ import rootStyle from "./root.css"
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [
     { rel: "stylesheet", href: cssBundleHref },
-    { rel: "stylesheet", href: blueColors},
-    { rel: "stylesheet", href: greenColors},
-    { rel: "stylesheet", href: orangeColors},
-    { rel: "stylesheet", href: redColors},
-    { rel: "stylesheet", href: blackColorAStyle},
-    { rel: "stylesheet", href: whiteColors},
-    { rel: "stylesheet", href: greyColors},
-    { rel: "stylesheet", href: fontStyle},
-    { rel: "stylesheet", href: generalStyle},
-    { rel: "stylesheet", href: rootStyle}
+    { rel: "stylesheet", href: blueColors },
+    { rel: "stylesheet", href: greenColors },
+    { rel: "stylesheet", href: orangeColors },
+    { rel: "stylesheet", href: redColors },
+    { rel: "stylesheet", href: blackColorAStyle },
+    { rel: "stylesheet", href: whiteColors },
+    { rel: "stylesheet", href: greyColors },
+    { rel: "stylesheet", href: fontStyle },
+    { rel: "stylesheet", href: generalStyle },
+    { rel: "stylesheet", href: rootStyle }
   ] : []),
 ];
 
@@ -52,7 +52,7 @@ const navbarPages = [
   },
   {
     name: "Budgeting",
-    to: "/budgets"
+    to: "/budgets/expenses"
   },
   {
     name: "Personal Configuration",

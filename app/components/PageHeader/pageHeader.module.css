@@ -1,0 +1,18 @@
+/* @import "@radix-ui/colors/blue.css"; */
+
+.container {
+  height: 11rem;
+}
+
+.pageTitle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  height: 5em;
+}
+
+.subPages {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 1em;
+}

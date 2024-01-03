@@ -30,7 +30,7 @@
 }
 
 .navbarListElement {
-    padding: 0.5em;
+  padding: 0.5em;
 }
 
 .navbarListElement a {
@@ -39,7 +39,7 @@
 }
 
 .navbarListElement a::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   transform: scaleX(0);

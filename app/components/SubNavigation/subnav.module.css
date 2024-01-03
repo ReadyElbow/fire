@@ -5,15 +5,17 @@
   background-color: var(--blue-6);
 }
 
-.subNavLink, .subNavButton {
-  color: var(--black-a11);
-}
-
+.subNavLink,
 .subNavButton {
-  background-color: inherit;
+  color: var(--black-a11);
+  all: unset;
+  /* padding: 0.5rem; */
 }
 
-.subNavLink a.active {
-  color: var(--blue-10);
+.subNavLinkActive {
+  color: var(--blue-9);
 }
 
+.subNavLinkPending {
+  color: var(--blue-9);
+}

@@ -48,7 +48,6 @@ model JobHistory {
   activeJob Boolean   @default(true)
   startDate DateTime
   endDate   DateTime?
-  type      String
   salary    Float
 
   @@id([jobTitle, employer])

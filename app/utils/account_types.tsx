@@ -6,3 +6,8 @@ export const accountTypes = [
   "Investment Account",
   "Loan Account",
 ]
+
+export const expenseAccountTypes = [
+  "Current Account",
+  "Credit Card Account",
+]

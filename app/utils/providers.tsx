@@ -1,5 +1,6 @@
 import { Barclays, HSBC, Lloyds, Marcus, Monzo, Natwest, Santander } from "public/Banking Logos"
 
+
 export const accountProviders = {
   "Barclays": Barclays,
   "HSBC": HSBC,

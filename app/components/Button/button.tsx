@@ -20,7 +20,7 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ children, variant, ...props }, ref) => {
     let buttonClassName: string;
-    
+
     if (variant === "secondary") {
       buttonClassName = styles.SecondaryButton;
     } else {

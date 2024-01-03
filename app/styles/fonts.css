@@ -1,42 +1,45 @@
 @font-face {
-    font-family: GeistRegular;
-    src: url("public/Geist/Geist-Regular.otf");
-    font-style: normal;
-    font-display: swap;
+  font-family: GeistRegular;
+  src: url("public/Geist/Geist-Regular.otf");
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-    font-family: GeistBold;
-    src: url("public/Geist/Geist-Bold.otf");
-    font-style: normal;
-    font-display: swap;
+  font-family: GeistBold;
+  src: url("public/Geist/Geist-Bold.otf");
+  font-style: normal;
+  font-display: swap;
 }
 @font-face {
-    font-family: GeistSemiBold;
-    src: url("public/Geist/Geist-SemiBold.otf");
-    font-style: normal;
-    font-display: swap;
+  font-family: GeistSemiBold;
+  src: url("public/Geist/Geist-SemiBold.otf");
+  font-style: normal;
+  font-display: swap;
 }
-
 
 * {
-    font-family: GeistRegular;
+  font-family: GeistRegular;
 }
 
 h1 {
-    font-family: GeistRegular;
-    font-size: 2.5rem;
+  font-family: GeistRegular;
+  font-size: 2.5rem;
 }
 
-h2, h3, h4, h5, h6 {
-    font-family: GeistRegular;
-    font-weight: 500;
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: GeistRegular;
+  font-weight: 500;
 }
 
 .backgroundText {
-    font-weight: 300;
-    color: var(--gray-11);
+  font-weight: 300;
+  color: var(--gray-11);
 }
 
 .errorText {
-    color: var(--tomato-11);
+  color: var(--tomato-11);
 }

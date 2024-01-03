@@ -11,40 +11,40 @@ function calculateNextDate(currentDate: string) {
     return `${expectedXDate.getFullYear()}-${(expectedXDate.getMonth() + 1).toString().padStart(2, '0')}`
 }
 
-function fillMissingValues(providerData: { x: string; y: number; }[], latestGeneralDate:string){
+function fillMissingValues(providerData: { x: string; y: number; }[], latestGeneralDate: string) {
     let latestProviderDate = providerData[providerData.length - 1].x
     let latestProviderAmount = providerData[providerData.length - 1].y
     // Check missing values inbetween its boundaries
-    for (let index=0; index<providerData.length; index++) {
+    for (let index = 0; index < providerData.length; index++) {
         let nextIndex = index + 1
-        if (nextIndex == providerData.length){
+        if (nextIndex == providerData.length) {
             break
         }
         let expectedX = calculateNextDate(providerData[index].x)
         while (providerData[nextIndex].x != expectedX) {
-            providerData.push({x: expectedX, y: providerData[index].y});
+            providerData.push({ x: expectedX, y: providerData[index].y });
             nextIndex = nextIndex + 1;
             expectedX = calculateNextDate(providerData[index].x);
         }
     }
-    
+
     if (latestProviderDate < latestGeneralDate) {
         latestProviderDate = calculateNextDate(latestProviderDate);
-        providerData.push({x: latestProviderDate, y: latestProviderAmount});
+        providerData.push({ x: latestProviderDate, y: latestProviderAmount });
     }
     return providerData
 }
 
-export function NetworthSummaryGraph(props: {summaryData: TransactionSummary[]}) {
-    type TDynamicObject = {[key: string] : number}
+export function NetworthSummaryGraph(props: { summaryData: TransactionSummary[] }) {
+    type TDynamicObject = { [key: string]: number }
     let chartData: NivoChartLineData = [];
     let totalPerMonth: TDynamicObject = {}
     let provider_indexes: TDynamicObject = {};
-    let latestGeneralDate:string = "";
+    let latestGeneralDate: string = "";
     const prismaData = props.summaryData
 
-    for (let index=0; index<prismaData.length; index++){
-        const { provider, x, y} = prismaData[index];
+    for (let index = 0; index < prismaData.length; index++) {
+        const { provider, x, y } = prismaData[index];
         if (latestGeneralDate < x) {
             latestGeneralDate = x;
         }
@@ -52,7 +52,7 @@ export function NetworthSummaryGraph(props: {summaryData: TransactionSummary[]})
         provider_indexes[provider] ??= chartData.length;
 
         const chartDataIndex = provider_indexes[provider]
-        if (chartData[chartDataIndex] == undefined){
+        if (chartData[chartDataIndex] == undefined) {
             chartData[chartDataIndex] = {
                 id: provider,
                 color: "hsl(121, 70%, 50%)",
@@ -60,21 +60,21 @@ export function NetworthSummaryGraph(props: {summaryData: TransactionSummary[]})
 
             };
         }
-        chartData[chartDataIndex].data.push({"x": x, "y": y});
+        chartData[chartDataIndex].data.push({ "x": x, "y": y });
     }
-    for (let index=0; index<chartData.length; index++) {
+    for (let index = 0; index < chartData.length; index++) {
         chartData[index].data = fillMissingValues(chartData[index].data, latestGeneralDate)
     }
 
-    for (let index=0; index < chartData.length; index++){
+    for (let index = 0; index < chartData.length; index++) {
         const providerData = chartData[index].data
-        for (let dataIndex=0; dataIndex < providerData.length; dataIndex++){
+        for (let dataIndex = 0; dataIndex < providerData.length; dataIndex++) {
             totalPerMonth[providerData[dataIndex].x] = totalPerMonth[providerData[dataIndex].x] == null ? providerData[dataIndex].y : totalPerMonth[providerData[dataIndex].x] + providerData[dataIndex].y;
         }
     }
     const chartDataTotal = [];
-    for (const [key,value] of Object.entries(totalPerMonth)){
-            chartDataTotal.push({"x": key, "y": value})
+    for (const [key, value] of Object.entries(totalPerMonth)) {
+        chartDataTotal.push({ "x": key, "y": value })
     }
     chartData.push({
         id: "Total",
@@ -83,7 +83,7 @@ export function NetworthSummaryGraph(props: {summaryData: TransactionSummary[]})
     })
 
 
-    return <ResponsiveLine 
+    return <ResponsiveLine
         theme={nivoTheme}
         data={chartData}
         yScale={{

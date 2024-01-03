@@ -1,17 +1,14 @@
 
-import { ColumnSpacingIcon } from "@radix-ui/react-icons"
 import { accountProviders } from "./providers"
+import React from "react";
 
-export function mapBankLogo(provider:string, width?:number) {
-    if (!width) {
-        width = 100
+type ImageProps = React.ImgHTMLAttributes<HTMLImageElement> & {
+    provider: string;
+};
+export const BankLogo = React.forwardRef<HTMLOrSVGElement, ImageProps>(
+    ({ provider, ...props }, ref) => {
+        return (
+            <img src={accountProviders[provider]} alt={provider} {...props} />
+        )
     }
-    console.log(provider)
-    console.log(accountProviders)
-    if (Object.keys(accountProviders).includes(provider)) {
-        return <img src={accountProviders[provider]} alt="" width={width}/>
-    } else {
-        return <h4>{provider}</h4>
-    }
-
-}
+)
