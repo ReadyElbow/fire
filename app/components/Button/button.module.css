@@ -2,13 +2,13 @@
   border: 0;
   border-radius: 0.5rem;
   padding: 0.7em;
-  background-color: var(--blue-9);
+  background-color: var(--color-primary);
   color: white;
 }
 
 .SecondaryButton {
   composes: Button;
   background-color: white;
-  color: var(--blue-9);
-  border: 1px solid var(--blue-9);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
 }

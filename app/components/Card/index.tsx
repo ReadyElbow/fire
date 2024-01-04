@@ -1,4 +1,4 @@
-import style from "./styles.module.css"
+import style from "./card.module.css"
 import { Link } from "@remix-run/react"
 
 export function Card(props: {
@@ -8,7 +8,7 @@ export function Card(props: {
     overwriteStyle?: object
 }) {
     const card = <>
-        {props.title && <div className={style.CardTitle}>{props.title}</div>}
+        {props.title && <div>{props.title}</div>}
         {props.body && <div>{props.body}</div>}
         {props.footer && <div>{props.footer}</div>}
     </>
@@ -27,7 +27,7 @@ export function InteractiveCard(props: {
     overwriteStyle?: object
 }) {
     const card = <>
-        {props.title && <div className={style.CardTitle}>{props.title}</div>}
+        {props.title && <div>{props.title}</div>}
         {props.body && props.body}
         {props.footer && props.footer}
     </>

@@ -2,29 +2,38 @@
 @import "@radix-ui/colors/slate.css";
 @import "@radix-ui/colors/black-alpha.css";
 @import "@radix-ui/colors/tomato.css";
+@import "@radix-ui/colors/grass.css";
+@import "@radix-ui/colors/amber.css";
 
+
+@import "@radix-ui/colors/blue-dark.css";
 :root {
   --color-primary: var(--blue-a9);
   --color-secondary: var(--blue-a10);
-  --color-page-background: var(--slate-3);
-  --color-content-background: var(--slate-1);
-  --color-text: var(--black-a1);
+  --color-page-background: var(--slate-1);
+  --color-content-background: var(--slate-3);
+  --color-hover-state: var(--slate-4);
+  --color-click-state: var(--slate-5);
+  --color-uninteractive-border: var(--slate-6);
+  --color-interactive-border: var(--slate-8);
+  --color-text: black;
   --color-subtext: var(--slate-11);
-  --color-error: var(--tomato-11);
-  --color-success: var(--green-9);
-  --color-warning: var(--yellow-9);
+  --color-error: var(--tomato-12);
+  --color-success: var(--grass-12);
+  --color-warning: var(--amber-12);
 }
+/* Need to use the dark scale variation instead here */
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-primary: var(--blue-a9); /* Keep the primary color */
+    --color-primary: var(--blue-a9); 
     --color-secondary: var(--blue-a10);
-    --color-page-background: var(--slate-9); /* Darken the page background */
-    --color-content-background: var(--slate-11); /* Darken the background color */
-    --color-text: var(--slate-1); /* Lighten the text color */
-    --color-subtext: var(--slate-3); /* Lighten the subtext color */
+    --color-page-background: var(--slate-12); 
+    --color-content-background: var(--slate-9); 
+    --color-text: var(--slate-11); 
+    --color-subtext: var(--slate-10);
     --color-error: var(--tomato-11);
-    --color-success: var(--green-3);
-    --color-warning: var(--yellow-3);
+    --color-success: var(--grass-3);
+    --color-warning: var(--amber-3);
   }
 }

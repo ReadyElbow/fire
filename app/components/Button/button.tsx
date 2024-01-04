@@ -1,6 +1,4 @@
-import type { LinksFunction } from "@remix-run/node";
-import styles from "./styles.module.css";
-import { JSXElementConstructor, ReactNode } from "react";
+import styles from "./button.module.css";
 import React from "react";
 
 

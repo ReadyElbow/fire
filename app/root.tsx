@@ -11,62 +11,17 @@ import {
 } from "@remix-run/react";
 import fontStyle from "./styles/fonts.css"
 import generalStyle from "./styles/general.css"
-import rootStyle from "./root.css"
 import themeStyle from "./theme.css"
+import MainLayout from "./components/NavBar/navbar";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [
     { rel: "stylesheet", href: cssBundleHref },
     { rel: "stylesheet", href: fontStyle },
     { rel: "stylesheet", href: generalStyle },
-    { rel: "stylesheet", href: rootStyle },
     { rel: "stylesheet", href: themeStyle },
   ] : []),
 ];
-
-
-const navbarPages = [
-  {
-    name: "Home",
-    to: "/"
-  },
-  {
-    name: "Dashboard",
-    to: "/dashboard"
-  },
-  {
-    name: "Accounts",
-    to: "/accounts"
-  },
-  {
-    name: "Budgeting",
-    to: "/budgets/expenses"
-  },
-  {
-    name: "Personal Configuration",
-    to: "/configure"
-  }
-]
-
-function NavBar() {
-  return <div className="navbarContainer">
-    <h1 className="navbarHeader">FIRE</h1>
-    <ul className="navbarList">
-      {navbarPages.map((page) => {
-        return <li key={page.name} className="navbarListElement">
-          <NavLink
-            to={page.to}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : ""
-            }
-          >
-            {page.name}
-          </NavLink>
-        </li>
-      })}
-    </ul>
-  </div>
-}
 
 export default function App() {
   return (
@@ -78,12 +33,7 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div className="pageBreakdown">
-          <NavBar />
-          <div className="pageContent">
-            <Outlet />
-          </div>
-        </div>
+        <MainLayout />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

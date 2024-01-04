@@ -14,12 +14,12 @@
   width: 300px;
   flex-shrink: 0;
   height: 100vh;
-  background-color: var(--gray-3);
+  background-color: var(--color-content-background);
   padding: 2em;
 }
 
 .navbarHeader {
-  color: var(--blue-10);
+  color: var(--color-primary);
   font-style: italic;
 }
 
@@ -46,7 +46,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: var(--blue-9);
+  background-color: var(--color-primary);
   transform-origin: bottom left;
   transition: transform 0.25s ease-out;
 }
@@ -58,10 +58,10 @@
 .navbarListElement a.active {
   color: var(--blue-11);
   text-decoration: underline;
-  text-decoration-color: var(--blue-9);
+  text-decoration-color: var(--color-primary);
   text-decoration-thickness: 3px;
 }
 
 .navbarListElement a.pending {
-  color: var(--blue-8);
+  color: var(--color-secondary);
 }
