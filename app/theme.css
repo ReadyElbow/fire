@@ -1,0 +1,30 @@
+@import "@radix-ui/colors/blue-alpha.css";
+@import "@radix-ui/colors/slate.css";
+@import "@radix-ui/colors/black-alpha.css";
+@import "@radix-ui/colors/tomato.css";
+
+:root {
+  --color-primary: var(--blue-a9);
+  --color-secondary: var(--blue-a10);
+  --color-page-background: var(--slate-3);
+  --color-content-background: var(--slate-1);
+  --color-text: var(--black-a1);
+  --color-subtext: var(--slate-11);
+  --color-error: var(--tomato-11);
+  --color-success: var(--green-9);
+  --color-warning: var(--yellow-9);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-primary: var(--blue-a9); /* Keep the primary color */
+    --color-secondary: var(--blue-a10);
+    --color-page-background: var(--slate-9); /* Darken the page background */
+    --color-content-background: var(--slate-11); /* Darken the background color */
+    --color-text: var(--slate-1); /* Lighten the text color */
+    --color-subtext: var(--slate-3); /* Lighten the subtext color */
+    --color-error: var(--tomato-11);
+    --color-success: var(--green-3);
+    --color-warning: var(--yellow-3);
+  }
+}
