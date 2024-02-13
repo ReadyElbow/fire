@@ -1,6 +1,9 @@
 /* @import "@radix-ui/colors/blue.css"; */
 
 .container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.5fr 0.5fr;
   height: 11rem;
 }
 
@@ -8,11 +11,21 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-end;
-  height: 5em;
+  grid-column: 1/2;
+  grid-row: 1/2;
+  /* height: 5em; */
+}
+
+.subTitle {
+  color: var(--color-subtext);
+  grid-column: 1/2;
+  grid-row: 2/3;
 }
 
 .subPages {
   display: flex;
   justify-content: flex-start;
   padding-top: 1em;
+  grid-column: 1/2;
+  grid-row: 3/4;
 }

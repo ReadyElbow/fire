@@ -1,9 +1,8 @@
-import { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { NavLink, Outlet, useLoaderData } from "@remix-run/react";
+import { LoaderFunctionArgs } from "@remix-run/node";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import { BankLogo } from "~/utils/bankingLogos";
 import { prisma } from "~/utils/prisma.server";
 import { SubNavigation } from "~/components/SubNavigation/subnav";
-import headerStyle from "~/styles/pageHeader.module.css"
 import { HeaderLayout } from "~/components/PageHeader/header";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -62,11 +61,11 @@ export default function AccountLayout() {
   })
 
   return <>
-      <HeaderLayout
-        title={<div style={{ display: "flex", alignItems: "center", gap: "0.2rem", height: "3em"}}><BankLogo provider={data.account.provider} height="90%" /><h1>{data.account.provider.split(" ")[0]}</h1></div>}
-        subTitle={`${data.account.bankAccountNumber}, ${data.account.bankAccountSortCode}`}
-        subPages={renderedSubPages}
-      />
-      <Outlet />
-    </>;
+    <HeaderLayout
+      title={<div style={{ display: "flex", alignItems: "center", gap: "0.2rem", height: "3em" }}><BankLogo provider={data.account.provider} height="90%" /><h1>{data.account.provider.split(" ")[0]}</h1></div>}
+      subTitle={`${data.account.bankAccountNumber}, ${data.account.bankAccountSortCode}`}
+      subPages={renderedSubPages}
+    />
+    <Outlet />
+  </>;
 }

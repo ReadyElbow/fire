@@ -1,0 +1,50 @@
+There are 3 types of Budgets
+ - Expenses
+    These are monthly expenditures you may make
+ - General Savings
+    These are savings you make for the long term
+ - Savings Goals
+    These are savings you make for a specific goal such as purhasing a car or a house or a treat for yourself
+
+
+They are represented by cards that the user can create delete and track where they are for the current month.
+
+The budget will be reset each month, by copying across the
+previous months budget and then allowing the user to make changes to it. If the user has not signed on for some time
+then the budget will be retrospectively filled back to the last time the user signed on.
+
+I do have to handle a number of edge cases as a result of this.
+
+General Issues
+ 1. If a user wishes to change the name of a budget, then I need to check that the name is not already in use. This extends to renaming all transactions already used by that budget category for that month.
+ 2. If a user wishes to delete a budget, then I need to check that the budget is not in use by any transactions. If it is then I need to ask the user what budget those transactions should be reassinged to.
+
+
+Savings Goals
+ 1. The user should have an option to mark a savings goal as being completed. For this, there should be a transaction category that indicates the relevant savings goal has been achieved. E.g. if they are saving for a Car, then a way of saving that they have purchased the car in the transactions. If this is detected in either the transactions or the savings goal, then the savings goal should be marked as completed. The user cannot mark it as completed until the transaction has been made. 
+ 2. If a user has reached their savings goal, then I need to ask the user what they want to do with the excess money if there is any. They can either move it to general savings or move it to a different savings goal.
+ 3. If a user has not reached their savings goal, then I need to ask the user what they want to do with the remaining money. They can either move it to general savings or move it to a different savings goal.
+
+General Savings
+  1. These are long long term savings so remain in place throughout months. They are not reset each month.
+  2. The user can move money from general savings to a savings goal or to expenses. They can also move money from a savings goal to general savings.
+  3. If the user chooses to delete a savings goal, then they can choose to move the money to general savings or to a different savings goal. This also takes into the account an ability to maybe split the money between multiple savings goals.
+
+
+Comments made by Copilot
+Savings Goals
+
+Marking a savings goal as completed: Linking transactions to savings goals and using them to track progress is a good idea. However, consider how you'll handle partial completions or overachievements.
+
+Handling excess money: Giving the user options to reallocate excess money is a good user experience. You might also want to consider allowing them to leave the excess money in the same savings goal for future use.
+
+Handling unmet savings goals: Similar to handling excess money, giving the user options to reallocate the remaining money is a good user experience.
+
+
+General Savings
+
+Long-term savings: Not resetting these savings each month makes sense. You might want to provide features for the user to track the growth of these savings over time.
+
+Moving money between categories: This provides flexibility to the user. Consider how you'll handle cases where the user wants to move more money than available.
+
+Deleting a savings goal: Giving the user options to reallocate the money is a good approach. Allowing splitting the money between multiple savings goals provides more flexibility.

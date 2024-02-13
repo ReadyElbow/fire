@@ -12,9 +12,9 @@ export async function action({ request }: ActionFunctionArgs) {
         jobTitle: formBody.get("jobTitle") as string,
         employer: formBody.get("employer") as string,
         startDate: new Date(formBody.get("startDate") as string),
-        salary: Number(formBody.get("salary") as string),
-      }
-    })
+        salary: Number(formBody.get("salary") as string)
+    }
+  })
     return redirect(`/configure`);
   } catch (error) {
     return json({ error: { general: "Something went wrong" } }, { status: 500 });  }

@@ -2,20 +2,18 @@
   margin-left: 0.5rem;
   margin-right: 0.5rem;
   width: 1px;
-  background-color: var(--blue-6);
+  background-color: var(--color-interactive-border);
 }
 
 .subNavLink,
 .subNavButton {
-  color: var(--black-a11);
   all: unset;
-  /* padding: 0.5rem; */
 }
 
 .subNavLinkActive {
-  color: var(--blue-9);
+  color: var(--color-primary);
 }
 
 .subNavLinkPending {
-  color: var(--blue-9);
+  color: var(--color-secondary);
 }

@@ -1,13 +1,6 @@
-.accounts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.accountCardTitle {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.addButton {
+  width: 1rem;
+  height: 1rem;
 }
 
 .createDialogOverlay {
@@ -62,16 +55,12 @@
   justify-content: space-between;
 }
 
-.createDialogFormRowContainer {
+.createDialogForm select,
+input {
   padding: 0.5rem;
   border-radius: 1rem;
   border: 1px solid var(--black-a4);
   background-color: var(--color-interactive-border);
-}
-
-.createDialogFormRowContainer input {
-  all: unset;
-  width: 100%;
 }
 
 .spinningIcon {

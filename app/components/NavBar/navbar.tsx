@@ -31,8 +31,14 @@ function NavBar() {
         return <li key={page.name} className={navbarStyle.navbarListElement}>
           <NavLink
             to={page.to}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : ""
+            className={({ isActive, isPending }) => {
+              if (isPending) {
+                return "pending";
+              } else if (isActive) {
+                return "active";
+              }
+              return "";
+            }
             }
           >
             {page.name}

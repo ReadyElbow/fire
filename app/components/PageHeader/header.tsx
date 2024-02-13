@@ -8,7 +8,7 @@ export function HeaderLayout(props: { subPages?: JSX.Element[], title: JSX.Eleme
       {props.title}
     </div>
     <br />
-    <h3 className="backgroundText">{props.subTitle}</h3>
+    <h3 className={headerStyle.subTitle}>{props.subTitle}</h3>
     {
       props.subPages &&
       <div className={headerStyle.subPages}>

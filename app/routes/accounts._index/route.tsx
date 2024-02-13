@@ -4,7 +4,7 @@
 import { Accounts, Prisma } from "@prisma/client";
 import { ActionFunctionArgs, LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { InteractiveCard } from "~/components/Card";
+import { InteractiveCard } from "~/components/Card/card";
 import { BankLogo } from "~/utils/bankingLogos";
 import { prisma } from "~/utils/prisma.server";
 import style from "./styles.module.css";

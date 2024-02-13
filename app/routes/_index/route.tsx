@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { features } from "./features";
-import { Card } from "~/components/Card";
+import { Card } from "~/components/Card/card";
 import * as Accordion from '@radix-ui/react-accordion';
 
 import styles from "./styles.module.css";

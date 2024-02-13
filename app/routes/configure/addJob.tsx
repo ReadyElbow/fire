@@ -18,7 +18,7 @@ export function AddJobDialog() {
   const buttonStyle: React.CSSProperties = { width: "4rem", height: "2rem" }
   return <Dialog.Root>
     <Dialog.Trigger asChild>
-      <SubNavigationButton>Add Account</SubNavigationButton>
+      <SubNavigationButton>Add Job</SubNavigationButton>
     </Dialog.Trigger>
     <Dialog.Portal>
       <Dialog.Overlay className={style.createDialogOverlay} />

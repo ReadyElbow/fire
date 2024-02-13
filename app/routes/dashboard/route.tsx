@@ -7,7 +7,7 @@ import { Accounts, Prisma } from "@prisma/client"
 import { monthlySummaryByAccount } from "~/utils/db_methods/transactions"
 import { NetworthSummaryGraph } from "./networthSummary"
 import { NivoContainer } from "~/components/NivoContainer"
-import { InteractiveCard } from "~/components/Card"
+import { InteractiveCard } from "~/components/Card/card"
 import { BankLogo } from "~/utils/bankingLogos"
 type HighLevelAccounts = Prisma.PromiseReturnType<typeof fetchHighLevelAccountsDetails>
 

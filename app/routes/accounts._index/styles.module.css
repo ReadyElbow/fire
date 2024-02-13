@@ -11,12 +11,15 @@
 }
 
 .createDialogOverlay {
-  background-color: var(--black-a4);
+  background-color: var(--color-uninteractive-border);
+  opacity: 0.9;
   position: fixed;
   inset: 0;
 }
 .createDialogContent {
-  background-color: white;
+  background-color: var(--color-content-background);
+  border-color: var(--color-interactive-border);
+  border: 0.05rem solid;
   border-radius: 0.5rem;
   position: fixed;
   /* Setting the location when it appears to be middle of page */
@@ -64,6 +67,7 @@ input {
   padding: 0.5rem;
   border-radius: 1rem;
   border: 1px solid var(--black-a4);
+  background-color: var(--color-interactive-border);
 }
 
 .spinningIcon {

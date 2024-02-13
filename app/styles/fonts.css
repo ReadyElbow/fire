@@ -19,27 +19,29 @@
 
 * {
   font-family: GeistRegular;
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 h1 {
-  font-family: GeistRegular;
   font-size: 2.5rem;
 }
 
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: GeistRegular;
-  font-weight: 500;
+h2 {
+  font-size: 2rem;
 }
 
-.backgroundText {
-  font-weight: 300;
-  color: var(--gray-11);
+h3 {
+  font-size: 1.5rem;
 }
 
-.errorText {
-  color: var(--tomato-11);
+h4 {
+  font-size: 1.25rem;
 }

@@ -4,7 +4,6 @@
 }
 
 .table th, td {
-  /* border: 1px solid var(--gray-6); */
   padding: 0.5rem;
   border-right: var(--gray-6) 1px solid;
   border-left: var(--gray-6) 1px solid;
@@ -28,11 +27,11 @@
 }
 
 .table th {
-  background-color: var(--gray-4);
+  background-color: var(--color-click-state);
 }
 
 .table tr:nth-child(2n) {
-  background-color: var(--gray-3);
+  background-color: var(--color-content-background);
 }
 
 @media (max-width: 950px) {

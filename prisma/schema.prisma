@@ -38,7 +38,7 @@ model TransactionCategories {
   id             Int              @id @default(autoincrement())
   budgetCategory String
   date           DateTime
-  budget         ExpenseBudget    @relation(fields: [budgetCategory, date], references: [budgetCategory, date])
+  budget         BudgetCategories    @relation(fields: [budgetCategory, date], references: [budgetCategory, date])
   transaction    BankTransactions @relation(fields: [id], references: [id])
 }
 
@@ -63,27 +63,28 @@ model Debts {
   budget       DebtBudget[]
 }
 
-model ExpenseBudget {
-  date               DateTime
-  budgetCategory     String
-  amount             Float
-  percentage         Float
-  notes              String
-  debtBudget         DebtBudget?
-  savingsBudget      SavingsBudget?
-  mappedTransactions TransactionCategories[]
+model BudgetedAmount {
+  date          DateTime @id
+  monthlyBudget Float
+}
 
+model BudgetCategories {
+  date                DateTime
+  budgetCategory      String
+  monthlyAmount       Float // Either the monthly contribution (savings/debt) or the monthly budget (expenses)
+  notes               String
+  savingsBudget       SavingsBudget?
+  debtBudget          DebtBudget?
+  mappedTransactions  TransactionCategories[]
   @@id([date, budgetCategory])
 }
 
 model DebtBudget {
-  date           DateTime
-  budgetCategory String
-  debtName       String
-  debts          Debts         @relation(fields: [debtName], references: [name])
-  expenseBudget  ExpenseBudget @relation(fields: [date, budgetCategory], references: [date, budgetCategory])
-
-  @@id([date, budgetCategory])
+  date      DateTime
+  debtName  String
+  debts     Debts     @relation(fields: [debtName], references: [name])
+  budgetCategories  BudgetCategories @relation(fields: [date, debtName], references: [date, budgetCategory])
+  @@id([date, debtName])
 }
 
 model SavingsBudget {
@@ -91,7 +92,6 @@ model SavingsBudget {
   budgetCategory String
   accountID      Int
   accounts       Accounts      @relation(fields: [accountID], references: [id])
-  expenseBudget  ExpenseBudget @relation(fields: [date, budgetCategory], references: [date, budgetCategory])
-
+  expenseBudget  BudgetCategories @relation(fields: [date, budgetCategory], references: [date, budgetCategory])
   @@id([date, budgetCategory])
 }
